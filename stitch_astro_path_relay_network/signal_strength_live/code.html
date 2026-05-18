@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ASTRO-PATH // GS-01 SIGNAL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #050505;
+            background-image: 
+                linear-gradient(rgba(192, 192, 192, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(192, 192, 192, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .laser-glow {
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+        }
+        .waveform-container {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .cursor-blink {
+            display: inline-block;
+            width: 8px;
+            height: 14px;
+            background-color: #00e639;
+            animation: blink 1s step-start infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#dfdcdb",
+                      "primary": "#ebffe2",
+                      "outline-variant": "#3b4b37",
+                      "surface-bright": "#393939",
+                      "on-secondary-fixed-variant": "#464747",
+                      "on-surface-variant": "#b9ccb2",
+                      "surface-container-high": "#2a2a2a",
+                      "on-primary-fixed-variant": "#00530e",
+                      "surface-container-low": "#1c1b1b",
+                      "surface-tint": "#00e639",
+                      "on-primary-container": "#007117",
+                      "on-error-container": "#ffdad6",
+                      "surface-container": "#20201f",
+                      "surface-variant": "#353535",
+                      "surface": "#131313",
+                      "on-tertiary": "#313030",
+                      "on-secondary": "#2f3131",
+                      "tertiary-fixed-dim": "#c9c6c5",
+                      "primary-fixed": "#72ff70",
+                      "surface-container-highest": "#353535",
+                      "error": "#ffb4ab",
+                      "inverse-primary": "#006e16",
+                      "surface-dim": "#131313",
+                      "inverse-on-surface": "#313030",
+                      "on-primary": "#003907",
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-tertiary-fixed-variant": "#474646",
+                      "on-tertiary-fixed": "#1c1b1b",
+                      "on-tertiary-container": "#626060",
+                      "primary-fixed-dim": "#00e639",
+                      "on-secondary-container": "#b8b8b8",
+                      "secondary-fixed": "#e3e2e2",
+                      "outline": "#84967e",
+                      "on-surface": "#e5e2e1",
+                      "on-secondary-fixed": "#1a1c1c",
+                      "background": "#131313",
+                      "primary-container": "#00ff41",
+                      "on-error": "#690005",
+                      "error-container": "#93000a",
+                      "tertiary-fixed": "#e5e2e1",
+                      "tertiary": "#fcf8f8",
+                      "on-primary-fixed": "#002203",
+                      "secondary": "#c6c6c6",
+                      "secondary-container": "#484949",
+                      "secondary-fixed-dim": "#c6c6c6",
+                      "inverse-surface": "#e5e2e1",
+                      "on-background": "#e5e2e1"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base-unit": "4px",
+                      "margin-mobile": "12px",
+                      "stack-md": "24px",
+                      "stack-sm": "8px",
+                      "grid-overlay-size": "32px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "data-mono": ["JetBrains Mono"],
+                      "display-lg": ["JetBrains Mono"],
+                      "body-base": ["JetBrains Mono"],
+                      "headline-md": ["JetBrains Mono"],
+                      "label-caps": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "data-mono": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "display-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.05em", "fontWeight": "700"}],
+                      "body-base": ["14px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                      "headline-md": ["20px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                      "label-caps": ["10px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background overflow-hidden">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-background border-b border-outline-variant flex justify-between items-center px-margin-mobile h-16 w-full">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="hub">hub</span>
+<h1 class="font-data-mono text-data-mono uppercase tracking-widest text-primary-fixed-dim">ASTRO-PATH // GS-01</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6 font-data-mono text-data-mono uppercase tracking-widest">
+<span class="text-primary-fixed-dim border-b border-primary-fixed-dim pb-1">Telemetry</span>
+<span class="text-outline hover:text-primary-fixed transition-colors cursor-pointer">Orbitals</span>
+<span class="text-outline hover:text-primary-fixed transition-colors cursor-pointer">Diagnostics</span>
+</div>
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="sensors_off">sensors_off</span>
+</div>
+</header>
+<!-- Alert Banner (Sticky behavior) -->
+<div class="fixed top-16 left-0 w-full z-40 px-margin-mobile pt-stack-sm">
+<div class="w-full bg-error-container text-on-error-container p-3 flex justify-between items-center border border-error">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined font-variation-settings-fill" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="font-label-caps text-label-caps font-bold">SIGNAL LOSS DETECTED: VOID-9 PROBE</span>
+</div>
+<span class="font-data-mono text-[10px] animate-pulse">RE-ESTABLISHING...</span>
+</div>
+</div>
+<!-- Main Content Canvas -->
+<main class="mt-32 pb-24 px-margin-mobile space-y-gutter overflow-y-auto h-screen">
+<!-- Live Waveform Module -->
+<section class="border border-outline-variant bg-surface-container p-base-unit relative overflow-hidden h-64 md:h-80">
+<!-- Vector Overlays -->
+<div class="absolute top-0 left-0 p-1 border-t border-l border-primary-fixed-dim w-4 h-4 opacity-50"></div>
+<div class="absolute top-0 right-0 p-1 border-t border-r border-primary-fixed-dim w-4 h-4 opacity-50"></div>
+<div class="absolute bottom-0 left-0 p-1 border-b border-l border-primary-fixed-dim w-4 h-4 opacity-50"></div>
+<div class="absolute bottom-0 right-0 p-1 border-b border-r border-primary-fixed-dim w-4 h-4 opacity-50"></div>
+<div class="flex justify-between items-start mb-2 px-2 pt-2">
+<div>
+<h2 class="font-label-caps text-label-caps text-outline uppercase">Live Telemetry Waveform</h2>
+<p class="font-data-mono text-primary-fixed-dim text-headline-md font-bold">SIGNAL_STRENGTH_HZ_01</p>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-highest px-3 py-1 border border-outline-variant">
+<div class="w-2 h-2 rounded-full bg-primary-fixed-dim laser-glow animate-pulse"></div>
+<span class="font-data-mono text-[10px] text-primary-fixed-dim">LIVE BROADCAST</span>
+</div>
+</div>
+<div class="relative w-full h-40 md:h-52 waveform-container flex items-center">
+<!-- SVG Waveform -->
+<svg class="w-full h-full stroke-primary-fixed-dim fill-none opacity-80" preserveaspectratio="none" viewbox="0 0 1000 100">
+<path d="M0 50 Q 50 10 100 50 T 200 50 T 300 50 T 400 20 T 500 80 T 600 50 T 700 30 T 800 70 T 900 50 T 1000 50" stroke-width="1"></path>
+<path class="opacity-30" d="M0 50 Q 25 20 50 50 T 100 50 T 150 50 T 200 30 T 250 70 T 300 50 T 350 40 T 400 60 T 450 50 T 500 50" stroke-width="0.5"></path>
+</svg>
+<!-- Mathematical scanning line -->
+<div class="absolute top-0 left-1/2 w-px h-full bg-primary-fixed-dim opacity-40 shadow-[0_0_10px_#00e639]"></div>
+</div>
+</section>
+<!-- Stats Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Metric 1: dBm -->
+<div class="border border-outline-variant bg-surface-container p-stack-sm relative">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-caps text-label-caps text-outline">STRENGTH (dBm)</span>
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-primary-fixed-dim">-114.2</span>
+<span class="font-data-mono text-outline text-[10px]">dBm</span>
+</div>
+<div class="mt-4 h-1 bg-surface-variant w-full">
+<div class="h-full bg-primary-fixed-dim w-[65%] laser-glow"></div>
+</div>
+</div>
+<!-- Metric 2: Latency -->
+<div class="border border-outline-variant bg-surface-container p-stack-sm">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-caps text-label-caps text-outline">LATENCY (ms)</span>
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm" data-icon="timer">timer</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-primary-fixed-dim">4.2k</span>
+<span class="font-data-mono text-outline text-[10px]">ms</span>
+</div>
+<div class="mt-4 flex gap-1">
+<div class="h-1 flex-1 bg-primary-fixed-dim"></div>
+<div class="h-1 flex-1 bg-primary-fixed-dim"></div>
+<div class="h-1 flex-1 bg-primary-fixed-dim"></div>
+<div class="h-1 flex-1 bg-surface-variant"></div>
+<div class="h-1 flex-1 bg-surface-variant"></div>
+</div>
+</div>
+<!-- Metric 3: Frequency -->
+<div class="border border-outline-variant bg-surface-container p-stack-sm">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-caps text-label-caps text-outline">FREQ (GHz)</span>
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm" data-icon="radio">radio</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-primary-fixed-dim">8.42</span>
+<span class="font-data-mono text-outline text-[10px]">GHz</span>
+</div>
+<div class="mt-4 font-data-mono text-[10px] text-primary-fixed-dim flex justify-between">
+<span>X-BAND</span>
+<span class="text-outline">LOCK: STABLE</span>
+</div>
+</div>
+</div>
+<!-- System Logs / Data Feed -->
+<section class="border border-outline-variant bg-surface-container-lowest p-stack-sm relative">
+<div class="flex items-center gap-2 mb-4 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm" data-icon="terminal">terminal</span>
+<span class="font-label-caps text-label-caps text-on-surface">VOYAGER_PROTOCOL_STREAM</span>
+</div>
+<div class="space-y-2 font-data-mono text-[11px] text-outline">
+<div class="flex gap-4">
+<span class="text-primary-fixed-dim">[14:22:01]</span>
+<span>INITIATING HANDSHAKE WITH GS-01 CORE</span>
+</div>
+<div class="flex gap-4">
+<span class="text-primary-fixed-dim">[14:22:03]</span>
+<span class="text-on-surface">SYNCHRONIZING ORBITAL PARAMETERS... OK</span>
+</div>
+<div class="flex gap-4">
+<span class="text-error">[14:22:09]</span>
+<span class="text-error">SIGNAL PACKET LOSS DETECTED (VOID-9)</span>
+</div>
+<div class="flex gap-4">
+<span class="text-primary-fixed-dim">[14:22:15]</span>
+<span>AUTO-CORRECTING AZIMUTH 0.04°...</span>
+</div>
+<div class="flex gap-4">
+<span class="text-primary-fixed-dim">[14:22:18]</span>
+<span>RECEIVING TELEMETRY BUFFER... <span class="cursor-blink"></span></span>
+</div>
+</div>
+</section>
+<section class="h-64 rounded-lg overflow-hidden border border-outline-variant relative">
+<img class="w-full h-full object-cover grayscale brightness-50 opacity-40" data-alt="A highly detailed cinematic view of a giant parabolic deep-space satellite antenna array under a vast, star-filled night sky. The scene is rendered in a cold, technical-minimalist style with high-contrast shadows and sharp edges. The lighting is dominated by subtle, glowing laser-green status lights on the antenna structure, contrasting with the deep space black of the background. The overall mood is authoritative and calculated, emphasizing advanced orbital communication technology." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpgyrBQa0Jt8VQNct6cpNblY7Znl3Q3XmRdD-S9FIRDLWbMghqAdslpVAr_WYnWHx55jBfGw47wv2nzmcp_Y6M-Esae2OnYXjy8YN6jf3D8v7qcvP-QQzTAOMd3Dt8iITA1C8hmH49FOa6nnvC7l-8Nc36dej7ve0dTb33CfY3n1tqYcqCsI0Vq31s0u8NlR7oSYRdHN39bDQLG4jiQoRF6wSyv51EOePDw837j3zGTNiBkjDPQeeWexkO3-B7hPLiSb2VheFeqszP"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<div class="bg-surface-container-highest px-3 py-2 border-l-2 border-primary-fixed-dim inline-block">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim">GROUND STATION GS-01 / SECTOR 7G</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe px-4 bg-surface border-t border-outline-variant z-50">
+<button class="flex flex-col items-center justify-center text-primary-fixed-dim bg-surface-container-highest rounded-none border-t-2 border-primary-fixed-dim p-2 Active: opacity-80 scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="wifi_tethering">wifi_tethering</span>
+<span class="font-label-caps text-label-caps">SIGNAL</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+<span class="font-label-caps text-label-caps">FILTER</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="explore_neighbor">explore_nearby</span>
+<span class="font-label-caps text-label-caps">STEER</span>
+</button>
+<button class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-label-caps text-label-caps">LOGS</span>
+</button>
+</nav>
+</body></html>

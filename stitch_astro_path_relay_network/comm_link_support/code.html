@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #050505;
+            background-image: 
+                linear-gradient(rgba(192, 192, 192, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(192, 192, 192, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+            color: #e5e2e1;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .laser-glow {
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #131313;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3b4b37;
+        }
+        .blink-cursor {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#690005",
+                    "background": "#131313",
+                    "surface-variant": "#353535",
+                    "primary-fixed": "#72ff70",
+                    "on-tertiary": "#313030",
+                    "surface-container-high": "#2a2a2a",
+                    "tertiary-container": "#dfdcdb",
+                    "secondary-fixed": "#e3e2e2",
+                    "on-tertiary-container": "#626060",
+                    "on-primary": "#003907",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-container-low": "#1c1b1b",
+                    "on-surface-variant": "#b9ccb2",
+                    "tertiary-fixed-dim": "#c9c6c5",
+                    "primary-fixed-dim": "#00e639",
+                    "secondary-fixed-dim": "#c6c6c6",
+                    "surface-bright": "#393939",
+                    "secondary-container": "#484949",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-highest": "#353535",
+                    "surface-container": "#20201f",
+                    "tertiary-fixed": "#e5e2e1",
+                    "on-primary-fixed-variant": "#00530e",
+                    "surface-dim": "#131313",
+                    "on-surface": "#e5e2e1",
+                    "surface": "#131313",
+                    "primary": "#ebffe2",
+                    "outline": "#84967e",
+                    "outline-variant": "#3b4b37"
+            },
+            "fontFamily": {
+                    "data-mono": ["JetBrains Mono"],
+                    "headline-md": ["JetBrains Mono"],
+                    "label-caps": ["JetBrains Mono"],
+                    "body-base": ["JetBrains Mono"],
+                    "display-lg": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "data-mono": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "label-caps": ["10px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "700"}],
+                    "body-base": ["14px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "display-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.05em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="font-body-base text-on-surface custom-scrollbar">
+<header class="fixed top-0 w-full z-50 bg-background flex justify-between items-center px-margin-mobile h-16 w-full border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="hub">hub</span>
+<h1 class="font-display-lg text-headline-md text-primary-fixed-dim tracking-tighter">ASTRO-PATH // GS-01</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-data-mono text-data-mono uppercase tracking-widest text-primary-fixed-dim">COMM_LINK: ACTIVE</span>
+<span class="material-symbols-outlined text-outline" data-icon="sensors_off">sensors_off</span>
+</div>
+</header>
+<main class="pt-24 pb-28 px-margin-mobile max-w-5xl mx-auto space-y-12">
+<section class="space-y-6">
+<div class="flex items-end justify-between border-b border-outline-variant pb-2">
+<div class="space-y-1">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim">SUB-PROTOCOL // 04</span>
+<h2 class="font-headline-md text-headline-md uppercase">Knowledge Base &amp; FAQ</h2>
+</div>
+<div class="relative group">
+<div class="absolute left-3 top-1/2 -translate-y-1/2">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="search">search</span>
+</div>
+<input class="bg-surface-container-low border-b border-outline outline-none px-10 py-2 font-data-mono text-data-mono w-64 focus:border-primary-fixed-dim transition-colors placeholder:text-outline/50" placeholder="FILTER BY KEYWORD..." type="text"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 w-2 h-4 bg-primary-fixed-dim blink-cursor"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<div class="md:col-span-4 space-y-4">
+<div class="p-4 bg-surface-container-low border border-outline-variant relative">
+<div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-primary-fixed-dim"></div>
+<div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-primary-fixed-dim"></div>
+<span class="font-label-caps text-label-caps text-outline block mb-2">SYSTEM_METRICS</span>
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-data-mono text-data-mono">QUERY_LATENCY</span>
+<span class="font-data-mono text-data-mono text-primary-fixed-dim">14ms</span>
+</div>
+<div class="w-full bg-surface-variant h-1">
+<div class="bg-primary-fixed-dim h-full w-[85%]"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-data-mono text-data-mono">DOC_INTEGRITY</span>
+<span class="font-data-mono text-data-mono text-primary-fixed-dim">99.9%</span>
+</div>
+</div>
+</div>
+<div class="p-4 border border-outline-variant hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="terminal">terminal</span>
+<span class="font-label-caps text-label-caps">TECHNICAL SPECS</span>
+</div>
+</div>
+<div class="p-4 border border-outline-variant hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline group-hover:text-primary-fixed-dim" data-icon="security">security</span>
+<span class="font-label-caps text-label-caps">PROTOCOL INFO</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-8 space-y-px bg-outline-variant border border-outline-variant">
+<div class="bg-surface p-6 space-y-4">
+<div class="flex justify-between items-center cursor-pointer group">
+<h3 class="font-headline-md text-body-base uppercase group-hover:text-primary-fixed-dim transition-colors">T-01 // Delta-V Calculation variances in LEO?</h3>
+<span class="material-symbols-outlined text-outline group-hover:rotate-180 transition-transform" data-icon="expand_more">expand_more</span>
+</div>
+<p class="font-body-base text-on-surface-variant leading-relaxed">
+                            Orbital decay variances are calculated using the J2 perturbation model. Ensure your ground station is synchronized with the latest atmospheric density indices (F10.7) to prevent telemetry drift.
+                        </p>
+</div>
+<div class="bg-surface p-6 space-y-4">
+<div class="flex justify-between items-center cursor-pointer group">
+<h3 class="font-headline-md text-body-base uppercase group-hover:text-primary-fixed-dim transition-colors">T-02 // Emergency handoff procedures (GS-01 to GS-02)</h3>
+<span class="material-symbols-outlined text-outline" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="bg-surface p-6 space-y-4">
+<div class="flex justify-between items-center cursor-pointer group">
+<h3 class="font-headline-md text-body-base uppercase group-hover:text-primary-fixed-dim transition-colors">T-03 // Encryption key rotation cycles</h3>
+<span class="material-symbols-outlined text-outline" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="space-y-6">
+<div class="flex items-end border-b border-outline-variant pb-2 gap-4">
+<div class="space-y-1">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim">COMS_CHANNEL // LOGS</span>
+<h2 class="font-headline-md text-headline-md uppercase">Mission Controller Notes</h2>
+</div>
+<div class="mb-1">
+<div class="flex items-center gap-2 px-2 py-0.5 bg-primary-fixed-dim/10 border border-primary-fixed-dim/20 rounded-full">
+<span class="w-1.5 h-1.5 bg-primary-fixed-dim rounded-full animate-pulse shadow-[0_0_5px_#00e639]"></span>
+<span class="font-data-mono text-[10px] text-primary-fixed-dim uppercase">LIVE_FEED</span>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex gap-4 p-4 border border-outline-variant bg-surface-container-low">
+<div class="flex-shrink-0">
+<div class="w-10 h-10 border border-primary-fixed-dim flex items-center justify-center bg-background">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+<div class="flex-grow space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="font-data-mono text-data-mono text-primary-fixed-dim uppercase">MC_CHEN.V</span>
+<span class="font-data-mono text-[10px] text-outline">STATION_BRAVO // 14:22:01 UTC</span>
+</div>
+<span class="material-symbols-outlined text-outline text-sm cursor-pointer hover:text-primary-fixed-dim" data-icon="push_pin">push_pin</span>
+</div>
+<p class="font-body-base text-on-surface-variant">
+                            Detected anomalous signal interference on the 437.5MHz band. Possible unauthorized uplink attempt or solar flare activity. Monitor S/N ratios closely for the next 3 orbital passes.
+                        </p>
+<div class="flex gap-4">
+<button class="flex items-center gap-1.5 font-label-caps text-[10px] text-outline hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="reply">reply</span> REPLY
+                            </button>
+<button class="flex items-center gap-1.5 font-label-caps text-[10px] text-outline hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="add_reaction">add_reaction</span> ACKNOWLEDGE
+                            </button>
+</div>
+<div class="ml-4 pl-4 border-l border-outline-variant space-y-4 mt-4">
+<div class="flex gap-3">
+<div class="w-8 h-8 border border-outline-variant flex items-center justify-center bg-surface">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="account_circle">account_circle</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-[10px] text-primary-fixed-dim uppercase">MC_HARRIS.K</span>
+<span class="font-data-mono text-[10px] text-outline">14:25:44 UTC</span>
+</div>
+<p class="font-body-base text-sm text-on-surface-variant">
+                                        Confirmed. Telemetry data shows spike in noise floor. Switching to frequency hopping protocol DELTA-9.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex gap-4 p-4 border border-outline-variant">
+<div class="flex-shrink-0">
+<div class="w-10 h-10 border border-outline-variant flex items-center justify-center bg-background">
+<span class="material-symbols-outlined text-outline" data-icon="support_agent">support_agent</span>
+</div>
+</div>
+<div class="flex-grow space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="font-data-mono text-data-mono text-primary-fixed-dim uppercase">SYS_ADMIN</span>
+<span class="font-data-mono text-[10px] text-outline">CORE_SERVER // 11:05:00 UTC</span>
+</div>
+</div>
+<p class="font-body-base text-on-surface-variant">
+                            Scheduled maintenance for the ground station antenna array will begin at 02:00 UTC. Expect intermittent signal loss for 45 minutes.
+                        </p>
+<div class="flex gap-4">
+<button class="flex items-center gap-1.5 font-label-caps text-[10px] text-outline hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="reply">reply</span> REPLY
+                            </button>
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 bg-surface border border-outline border-dashed">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm" data-icon="edit_square">edit_square</span>
+<span class="font-label-caps text-label-caps text-primary-fixed-dim uppercase">INITIALIZE NEW LOG ENTRY</span>
+</div>
+<textarea class="w-full bg-surface-container-low border-b border-outline outline-none p-3 font-body-base text-sm min-h-[100px] focus:border-primary-fixed-dim transition-colors resize-none placeholder:text-outline/30" placeholder="INPUT TELEMETRY NOTES OR STATUS UPDATES..."></textarea>
+<div class="flex justify-between items-center mt-4">
+<div class="flex gap-2">
+<button class="p-1.5 border border-outline-variant hover:border-primary-fixed-dim text-outline hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="attachment">attachment</span>
+</button>
+<button class="p-1.5 border border-outline-variant hover:border-primary-fixed-dim text-outline hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="alternate_email">alternate_email</span>
+</button>
+</div>
+<button class="bg-primary-fixed-dim text-on-primary font-label-caps text-label-caps px-6 py-2 hover:bg-primary-container transition-all active:scale-95 laser-glow">
+                            TRANSMIT LOG
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe px-4 bg-surface border-t border-outline-variant z-50">
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="wifi_tethering">wifi_tethering</span>
+<span class="font-label-caps text-label-caps mt-1">SIGNAL</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+<span class="font-label-caps text-label-caps mt-1">FILTER</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="explore_neighbor">AirplaneInFlight</span>
+<span class="font-label-caps text-label-caps mt-1">STEER</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary-fixed-dim bg-surface-container-highest rounded-none border-t-2 border-primary-fixed-dim p-2" href="#">
+<span class="material-symbols-outlined" data-icon="database" style="font-variation-settings: 'FILL' 1;">database</span>
+<span class="font-label-caps text-label-caps mt-1">LOGS</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#dfdcdb",
+                    "primary": "#ebffe2",
+                    "outline-variant": "#3b4b37",
+                    "surface-bright": "#393939",
+                    "on-secondary-fixed-variant": "#464747",
+                    "on-surface-variant": "#b9ccb2",
+                    "surface-container-high": "#2a2a2a",
+                    "on-primary-fixed-variant": "#00530e",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-tint": "#00e639",
+                    "on-primary-container": "#007117",
+                    "on-error-container": "#ffdad6",
+                    "surface-container": "#20201f",
+                    "surface-variant": "#353535",
+                    "surface": "#131313",
+                    "on-tertiary": "#313030",
+                    "on-secondary": "#2f3131",
+                    "tertiary-fixed-dim": "#c9c6c5",
+                    "primary-fixed": "#72ff70",
+                    "surface-container-highest": "#353535",
+                    "error": "#ffb4ab",
+                    "inverse-primary": "#006e16",
+                    "surface-dim": "#131313",
+                    "inverse-on-surface": "#313030",
+                    "on-primary": "#003907",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary-fixed-variant": "#474646",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "on-tertiary-container": "#626060",
+                    "primary-fixed-dim": "#00e639",
+                    "on-secondary-container": "#b8b8b8",
+                    "secondary-fixed": "#e3e2e2",
+                    "outline": "#84967e",
+                    "on-surface": "#e5e2e1",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "background": "#131313",
+                    "primary-container": "#00ff41",
+                    "on-error": "#690005",
+                    "error-container": "#93000a",
+                    "tertiary-fixed": "#e5e2e1",
+                    "tertiary": "#fcf8f8",
+                    "on-primary-fixed": "#002203",
+                    "secondary": "#c6c6c6",
+                    "secondary-container": "#484949",
+                    "secondary-fixed-dim": "#c6c6c6",
+                    "inverse-surface": "#e5e2e1",
+                    "on-background": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base-unit": "4px",
+                    "margin-mobile": "12px",
+                    "stack-md": "24px",
+                    "stack-sm": "8px",
+                    "grid-overlay-size": "32px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "data-mono": ["JetBrains Mono"],
+                    "display-lg": ["JetBrains Mono"],
+                    "body-base": ["JetBrains Mono"],
+                    "headline-md": ["JetBrains Mono"],
+                    "label-caps": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "data-mono": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.05em", "fontWeight": "700"}],
+                    "body-base": ["14px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "label-caps": ["10px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #050505;
+            background-image: 
+                linear-gradient(rgba(198, 198, 198, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(198, 198, 198, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .glow-laser {
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+        }
+        .vector-pattern {
+            background-image: radial-gradient(circle at 2px 2px, rgba(132, 150, 126, 0.15) 1px, transparent 0);
+            background-size: 16px 16px;
+        }
+        .custom-slider::-webkit-slider-runnable-track {
+            background: #353535;
+            height: 2px;
+        }
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 12px;
+            width: 12px;
+            background: #00e639;
+            margin-top: -5px;
+            border-radius: 0;
+            box-shadow: 0 0 8px rgba(0, 230, 57, 0.6);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-base text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background border-b border-outline-variant flex justify-between items-center px-margin-mobile h-16 w-full">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim">hub</span>
+<h1 class="font-data-mono text-data-mono uppercase tracking-widest text-primary-fixed-dim">ASTRO-PATH // GS-01</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-6">
+<span class="font-label-caps text-label-caps text-outline hover:text-primary-fixed cursor-pointer transition-colors uppercase">Signal Strength: 98%</span>
+<span class="font-label-caps text-label-caps text-outline hover:text-primary-fixed cursor-pointer transition-colors uppercase">Lat: 0.0012ms</span>
+</div>
+<span class="material-symbols-outlined text-primary-fixed-dim">sensors_off</span>
+</div>
+</header>
+<main class="pt-20 px-margin-mobile max-w-7xl mx-auto space-y-stack-md">
+<!-- Status Alert Banner -->
+<div class="w-full bg-primary-container p-2 flex items-center justify-between glow-laser">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-primary font-bold">warning</span>
+<span class="font-label-caps text-label-caps text-on-primary uppercase">Critical: High Frequency Background Radiation Detected</span>
+</div>
+<span class="font-data-mono text-data-mono text-on-primary">ISOLATION ACTIVE</span>
+</div>
+<!-- Main Dashboard Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Panel: Frequency Controls -->
+<div class="lg:col-span-4 space-y-gutter">
+<div class="border border-outline-variant bg-surface p-4 relative vector-pattern">
+<div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-primary-fixed-dim"></div>
+<div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-primary-fixed-dim"></div>
+<h2 class="font-headline-md text-headline-md text-primary-fixed-dim mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined">tune</span>
+                        ISOLATION PARAMS
+                    </h2>
+<div class="space-y-6">
+<!-- Frequency Slider 1 -->
+<div class="space-y-2">
+<div class="flex justify-between font-data-mono text-data-mono text-outline">
+<span>LOW-PASS FILTER</span>
+<span class="text-primary-fixed-dim">450.2 MHz</span>
+</div>
+<input class="w-full appearance-none bg-transparent custom-slider" type="range" value="45"/>
+</div>
+<!-- Frequency Slider 2 -->
+<div class="space-y-2">
+<div class="flex justify-between font-data-mono text-data-mono text-outline">
+<span>HIGH-PASS FILTER</span>
+<span class="text-primary-fixed-dim">1.2 GHz</span>
+</div>
+<input class="w-full appearance-none bg-transparent custom-slider" type="range" value="72"/>
+</div>
+<!-- Frequency Slider 3 -->
+<div class="space-y-2">
+<div class="flex justify-between font-data-mono text-data-mono text-outline">
+<span>NOISE REDUCTION</span>
+<span class="text-primary-fixed-dim">-24 dB</span>
+</div>
+<input class="w-full appearance-none bg-transparent custom-slider" type="range" value="85"/>
+</div>
+<button class="w-full border border-primary-fixed-dim py-3 font-label-caps text-label-caps text-primary-fixed-dim hover:bg-primary-fixed-dim hover:text-background transition-all uppercase tracking-widest mt-4">
+                            CALIBRATE SENSORS
+                        </button>
+</div>
+</div>
+<!-- Active Filters Chip Cloud -->
+<div class="border border-outline-variant bg-surface p-4">
+<h3 class="font-label-caps text-label-caps text-outline mb-3 uppercase">Active Filtering Chains</h3>
+<div class="flex flex-wrap gap-2">
+<div class="bg-surface-container flex items-center border-l-2 border-primary-fixed-dim px-2 py-1">
+<span class="font-data-mono text-data-mono text-on-surface">COSMIC_BG_SUPP</span>
+</div>
+<div class="bg-surface-container flex items-center border-l-2 border-primary-fixed-dim px-2 py-1">
+<span class="font-data-mono text-data-mono text-on-surface">SOLAR_FLARE_V3</span>
+</div>
+<div class="bg-surface-container flex items-center border-l-2 border-secondary px-2 py-1 opacity-50">
+<span class="font-data-mono text-data-mono text-on-surface">GRAV_WAVE_NULL</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Spectral Analysis -->
+<div class="lg:col-span-8">
+<div class="border border-outline-variant bg-surface relative h-full min-h-[400px] overflow-hidden">
+<div class="absolute top-4 left-4 z-10">
+<h2 class="font-headline-md text-headline-md text-primary-fixed-dim flex items-center gap-2">
+<span class="material-symbols-outlined">analytics</span>
+                            SPECTRAL ANALYSIS
+                        </h2>
+<p class="font-data-mono text-data-mono text-outline">GS-01 // REAL-TIME TELEMETRY</p>
+</div>
+<div class="absolute top-4 right-4 z-10 flex gap-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 bg-primary-fixed-dim rounded-full animate-pulse glow-laser"></div>
+<span class="font-label-caps text-label-caps text-primary-fixed-dim">LIVE SIGNAL</span>
+</div>
+</div>
+<!-- Visual Representation of Spectral Analysis -->
+<div class="absolute inset-0 flex items-end px-4 pb-4 gap-1 opacity-80">
+<!-- Simulated Waveform Bars -->
+<div class="bg-primary-fixed-dim w-full h-[20%]"></div>
+<div class="bg-primary-fixed-dim w-full h-[35%]"></div>
+<div class="bg-primary-fixed-dim w-full h-[65%]"></div>
+<div class="bg-primary-fixed-dim w-full h-[45%]"></div>
+<div class="bg-primary-fixed-dim w-full h-[85%] glow-laser"></div>
+<div class="bg-primary-fixed-dim w-full h-[95%] glow-laser"></div>
+<div class="bg-primary-fixed-dim w-full h-[75%]"></div>
+<div class="bg-primary-fixed-dim w-full h-[30%]"></div>
+<div class="bg-outline w-full h-[15%] opacity-30"></div>
+<div class="bg-outline w-full h-[10%] opacity-30"></div>
+<div class="bg-primary-fixed-dim w-full h-[40%]"></div>
+<div class="bg-primary-fixed-dim w-full h-[60%]"></div>
+<div class="bg-primary-fixed-dim w-full h-[80%] glow-laser"></div>
+<div class="bg-primary-fixed-dim w-full h-[55%]"></div>
+<div class="bg-primary-fixed-dim w-full h-[35%]"></div>
+<div class="bg-primary-fixed-dim w-full h-[25%]"></div>
+</div>
+<!-- Mathematical Overlays -->
+<div class="absolute inset-0 pointer-events-none">
+<div class="absolute top-1/2 left-0 w-full h-[1px] bg-outline-variant opacity-30"></div>
+<div class="absolute top-0 left-1/4 w-[1px] h-full bg-outline-variant opacity-30"></div>
+<div class="absolute top-0 left-2/4 w-[1px] h-full bg-outline-variant opacity-30"></div>
+<div class="absolute top-0 left-3/4 w-[1px] h-full bg-outline-variant opacity-30"></div>
+</div>
+<!-- Image Representation -->
+<div class="absolute inset-0 -z-10 opacity-40">
+<img class="w-full h-full object-cover" data-alt="A highly detailed cinematic visualization of a deep space spectral analysis interface. The screen displays complex digital waveforms in vibrant laser green against a pitch-black cosmic background filled with distant nebulae and star clusters. Mathematical grid overlays and technical data readouts create an authoritative engineering aesthetic. The lighting is dominated by the neon glow of the data visualizations, casting a professional and futuristic atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfvua3XLzM7uPM_b7LVck_RBlW4t8dYdkPapsDavzKee-TWXL_hj-9fMz7QnJ4HubG--33x3ECGSNuvPT0BxY6xQvrIfT4lu0E4WO7GBbsA3Szpu3fcQdzilvJ2r2feR0gKFLfpr3aeleHClwe3b2gUC05KjbOBPilbBcHtzK3O6jHdZebNTBUCeK3lkeOWxgLyHziLZk02FKuoTPIpHEtbLsDXqE2bkm8DWTMT5f4CuxGamieBluUoYliuy6RsFLRtUO8YQJArYTp"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Data Readout Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="border border-outline-variant bg-surface p-4 flex flex-col justify-between h-32">
+<span class="font-label-caps text-label-caps text-outline uppercase">Signal Noise Ratio</span>
+<div class="text-display-lg font-display-lg text-primary-fixed-dim">+42.8 <span class="text-sm">dB</span></div>
+<div class="h-1 bg-surface-container-highest w-full"><div class="h-full bg-primary-fixed-dim" style="width: 82%"></div></div>
+</div>
+<div class="border border-outline-variant bg-surface p-4 flex flex-col justify-between h-32">
+<span class="font-label-caps text-label-caps text-outline uppercase">Dropped Packets</span>
+<div class="text-display-lg font-display-lg text-error">0.003 <span class="text-sm">%</span></div>
+<div class="h-1 bg-surface-container-highest w-full"><div class="h-full bg-error" style="width: 4%"></div></div>
+</div>
+<div class="border border-outline-variant bg-surface p-4 flex flex-col justify-between h-32">
+<span class="font-label-caps text-label-caps text-outline uppercase">Filter Efficiency</span>
+<div class="text-display-lg font-display-lg text-primary-fixed-dim">99.4 <span class="text-sm">%</span></div>
+<div class="h-1 bg-surface-container-highest w-full"><div class="h-full bg-primary-fixed-dim" style="width: 99%"></div></div>
+</div>
+<div class="border border-outline-variant bg-surface p-4 flex flex-col justify-between h-32">
+<span class="font-label-caps text-label-caps text-outline uppercase">Node Uptime</span>
+<div class="text-display-lg font-display-lg text-secondary">842 <span class="text-sm">HRS</span></div>
+<div class="flex gap-1">
+<div class="w-1 h-1 bg-primary-fixed-dim"></div>
+<div class="w-1 h-1 bg-primary-fixed-dim"></div>
+<div class="w-1 h-1 bg-primary-fixed-dim"></div>
+<div class="w-1 h-1 bg-outline opacity-30"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe px-4 bg-surface border-t border-outline-variant z-50">
+<div class="flex flex-col items-center justify-center text-outline p-2 transition-all hover:text-primary-fixed cursor-pointer">
+<span class="material-symbols-outlined">wifi_tethering</span>
+<span class="font-label-caps text-label-caps uppercase">SIGNAL</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary-fixed-dim bg-surface-container-highest rounded-none border-t-2 border-primary-fixed-dim p-2 transition-all opacity-80 scale-95">
+<span class="material-symbols-outlined">filter_list</span>
+<span class="font-label-caps text-label-caps uppercase">FILTER</span>
+</div>
+<div class="flex flex-col items-center justify-center text-outline p-2 transition-all hover:text-primary-fixed cursor-pointer">
+<span class="material-symbols-outlined">explore_nearby</span>
+<span class="font-label-caps text-label-caps uppercase">STEER</span>
+</div>
+<div class="flex flex-col items-center justify-center text-outline p-2 transition-all hover:text-primary-fixed cursor-pointer">
+<span class="material-symbols-outlined">database</span>
+<span class="font-label-caps text-label-caps uppercase">LOGS</span>
+</div>
+</nav>
+</body></html>

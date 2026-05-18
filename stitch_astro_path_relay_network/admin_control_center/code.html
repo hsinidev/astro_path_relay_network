@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ASTRO-PATH // GS-01 ADMIN PANEL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#690005",
+                    "background": "#131313",
+                    "surface-variant": "#353535",
+                    "primary-fixed": "#72ff70",
+                    "on-tertiary": "#313030",
+                    "surface-container-high": "#2a2a2a",
+                    "tertiary-container": "#dfdcdb",
+                    "secondary-fixed": "#e3e2e2",
+                    "on-tertiary-container": "#626060",
+                    "on-primary": "#003907",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-container-low": "#1c1b1b",
+                    "on-surface-variant": "#b9ccb2",
+                    "tertiary-fixed-dim": "#c9c6c5",
+                    "primary-fixed-dim": "#00e639",
+                    "secondary-fixed-dim": "#c6c6c6",
+                    "surface-bright": "#393939",
+                    "secondary-container": "#484949",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-highest": "#353535",
+                    "surface-container": "#20201f",
+                    "tertiary-fixed": "#e5e2e1",
+                    "on-primary-fixed-variant": "#00530e",
+                    "surface-dim": "#131313",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "primary-container": "#00ff41",
+                    "on-primary-container": "#007117",
+                    "outline": "#84967e",
+                    "on-secondary-container": "#b8b8b8",
+                    "on-background": "#e5e2e1",
+                    "surface-tint": "#00e639",
+                    "surface-container-lowest": "#0e0e0e",
+                    "inverse-primary": "#006e16",
+                    "primary": "#ebffe2",
+                    "secondary": "#c6c6c6",
+                    "tertiary": "#fcf8f8",
+                    "outline-variant": "#3b4b37",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed-variant": "#464747",
+                    "error-container": "#93000a",
+                    "on-surface": "#e5e2e1",
+                    "surface": "#131313",
+                    "inverse-on-surface": "#313030",
+                    "on-tertiary-fixed-variant": "#474646",
+                    "on-secondary": "#2f3131",
+                    "on-primary-fixed": "#002203"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "stack-md": "24px",
+                    "stack-sm": "8px",
+                    "grid-overlay-size": "32px",
+                    "base-unit": "4px",
+                    "margin-mobile": "12px"
+            },
+            "fontFamily": {
+                    "data-mono": ["JetBrains Mono"],
+                    "headline-md": ["JetBrains Mono"],
+                    "label-caps": ["JetBrains Mono"],
+                    "body-base": ["JetBrains Mono"],
+                    "display-lg": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "data-mono": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "label-caps": ["10px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "700"}],
+                    "body-base": ["14px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "display-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.05em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #050505;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .laser-glow {
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+        }
+        .active-glow {
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+        .pulse-dot {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .3; }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #131313;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3b4b37;
+        }
+    </style>
+</head>
+<body class="text-on-background font-body-base antialiased min-h-screen pb-24 pt-20">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background border-b border-outline-variant flex justify-between items-center px-margin-mobile h-16 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="hub">hub</span>
+<h1 class="font-display-lg text-headline-md text-primary-fixed-dim tracking-tighter uppercase">ASTRO-PATH // GS-01</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex flex-col items-end">
+<span class="font-data-mono text-data-mono text-primary-fixed-dim">ORBITAL_SYNC: ACTIVE</span>
+<span class="font-data-mono text-[10px] text-outline uppercase">LAT: 34.0522 N // LON: 118.2437 W</span>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="sensors_off">sensors_off</span>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="max-w-7xl mx-auto px-margin-mobile md:px-gutter grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- System Health Alerts (Top 15% Behavior) -->
+<section class="md:col-span-12 space-y-2 mb-4">
+<div class="bg-primary-container text-on-primary-container px-4 py-2 flex justify-between items-center laser-glow">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle">check_circle</span>
+<span class="font-label-caps text-label-caps">SYSTEM STATUS: NOMINAL</span>
+</div>
+<span class="font-data-mono text-data-mono">UPTIME: 142:12:04:11</span>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<!-- Hardware Module: Antenna Status -->
+<section class="md:col-span-4 bg-surface-container-low border border-outline-variant p-stack-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 p-1 opacity-20">
+<span class="material-symbols-outlined text-sm" data-icon="close_fullscreen">close_fullscreen</span>
+</div>
+<div class="flex items-center gap-2 mb-4 border-l-2 border-primary-fixed-dim pl-2">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim">ANTENNA_ARRAY_X1</span>
+</div>
+<div class="aspect-square w-full bg-surface-container-lowest border border-outline-variant flex items-center justify-center relative">
+<div class="absolute inset-0 flex items-center justify-center opacity-10">
+<div class="w-full h-[1px] bg-outline"></div>
+<div class="h-full w-[1px] bg-outline absolute"></div>
+<div class="w-48 h-48 border border-outline rounded-full"></div>
+</div>
+<div class="z-10 text-center">
+<span class="material-symbols-outlined text-primary-fixed-dim text-5xl pulse-dot" data-icon="settings_input_antenna" style="font-variation-settings: 'FILL' 1;">settings_input_antenna</span>
+<div class="mt-2 font-data-mono text-data-mono text-primary-fixed-dim">AZIMUTH: 184.2°</div>
+<div class="font-data-mono text-data-mono text-primary-fixed-dim">ELEVATION: 42.8°</div>
+</div>
+</div>
+<div class="mt-4 grid grid-cols-2 gap-2">
+<div class="bg-surface-container-high p-2 border border-outline-variant">
+<div class="text-[10px] text-outline font-label-caps">SIGNAL_STRENGTH</div>
+<div class="font-data-mono text-headline-md text-primary-fixed-dim">-94.2 dBm</div>
+</div>
+<div class="bg-surface-container-high p-2 border border-outline-variant">
+<div class="text-[10px] text-outline font-label-caps">MOTOR_TEMP</div>
+<div class="font-data-mono text-headline-md text-primary-fixed-dim">32.4°C</div>
+</div>
+</div>
+</section>
+<!-- Data Logs: CPU/Memory Telemetry -->
+<section class="md:col-span-8 bg-surface-container-low border border-outline-variant p-stack-sm">
+<div class="flex items-center justify-between mb-4 border-l-2 border-primary-fixed-dim pl-2">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim">PROCESSOR_TELEMETRY</span>
+<span class="font-data-mono text-data-mono text-outline">REFRESH: 100ms</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
+<!-- CPU Logs -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-[10px] text-outline">CORE_USAGE_AVG</span>
+<span class="font-data-mono text-data-mono text-primary-fixed-dim">42.8%</span>
+</div>
+<div class="h-32 bg-surface-container-lowest border border-outline-variant flex items-end p-1 gap-[1px]">
+<div class="bg-primary-fixed-dim w-full h-[20%] opacity-40"></div>
+<div class="bg-primary-fixed-dim w-full h-[35%] opacity-50"></div>
+<div class="bg-primary-fixed-dim w-full h-[42%] opacity-60"></div>
+<div class="bg-primary-fixed-dim w-full h-[38%] opacity-50"></div>
+<div class="bg-primary-fixed-dim w-full h-[55%] opacity-70"></div>
+<div class="bg-primary-fixed-dim w-full h-[48%] opacity-60"></div>
+<div class="bg-primary-fixed-dim w-full h-[62%] laser-glow"></div>
+<div class="bg-primary-fixed-dim w-full h-[58%] opacity-70"></div>
+<div class="bg-primary-fixed-dim w-full h-[45%] opacity-50"></div>
+<div class="bg-primary-fixed-dim w-full h-[30%] opacity-40"></div>
+</div>
+<div class="mt-2 space-y-1">
+<div class="flex justify-between text-data-mono text-[10px] border-b border-outline-variant/30 pb-1">
+<span class="text-outline">PID: 8042 (KERNEL)</span>
+<span class="text-primary-fixed-dim">12.4%</span>
+</div>
+<div class="flex justify-between text-data-mono text-[10px] border-b border-outline-variant/30 pb-1">
+<span class="text-outline">PID: 9110 (RX_DAEMON)</span>
+<span class="text-primary-fixed-dim">08.1%</span>
+</div>
+</div>
+</div>
+<!-- Memory Logs -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-[10px] text-outline">MEMORY_COMMIT</span>
+<span class="font-data-mono text-data-mono text-primary-fixed-dim">12.8 / 64 GB</span>
+</div>
+<div class="flex-grow bg-surface-container-lowest border border-outline-variant relative p-2">
+<div class="w-full h-2 bg-surface-container-high relative">
+<div class="absolute top-0 left-0 h-full w-[20%] bg-primary-fixed-dim laser-glow"></div>
+</div>
+<div class="mt-4 grid grid-cols-1 gap-2">
+<div class="bg-surface-variant/20 p-2 border border-outline-variant">
+<div class="text-[10px] text-outline font-label-caps">BUFFER_CACHE</div>
+<div class="font-data-mono text-data-mono text-on-surface">4.2 GB [FIXED]</div>
+</div>
+<div class="bg-surface-variant/20 p-2 border border-outline-variant">
+<div class="text-[10px] text-outline font-label-caps">SWAP_FILE</div>
+<div class="font-data-mono text-data-mono text-on-surface">0.0 GB [IDLE]</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- User Permissions Management -->
+<section class="md:col-span-12 bg-surface-container-low border border-outline-variant overflow-hidden">
+<div class="bg-surface-container-high px-4 py-2 flex justify-between items-center border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span class="font-label-caps text-label-caps">ACCESS_CONTROL_MATRIX</span>
+</div>
+<button class="border border-outline px-3 py-1 text-data-mono text-[10px] hover:bg-primary-fixed-dim hover:text-background transition-colors uppercase">
+                    ADD_OPERATOR
+                </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full font-data-mono text-data-mono">
+<thead>
+<tr class="bg-surface-container-lowest text-outline border-b border-outline-variant">
+<th class="p-4 text-left font-normal uppercase">ID_HASH</th>
+<th class="p-4 text-left font-normal uppercase">OPERATOR</th>
+<th class="p-4 text-left font-normal uppercase">CLEARANCE</th>
+<th class="p-4 text-left font-normal uppercase">LAST_LOGIN</th>
+<th class="p-4 text-right font-normal uppercase">ACTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-surface-variant/10 transition-colors">
+<td class="p-4 text-primary-fixed-dim">0x8F22A</td>
+<td class="p-4">Cmdr. Sterling</td>
+<td class="p-4">
+<span class="bg-primary-container/20 text-primary-fixed-dim border border-primary-fixed-dim/30 px-2 py-0.5 text-[10px]">LVL_05_ROOT</span>
+</td>
+<td class="p-4 text-outline">2024.05.21 14:22:01</td>
+<td class="p-4 text-right">
+<button class="material-symbols-outlined text-outline hover:text-error" data-icon="lock_reset">lock_reset</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/10 transition-colors">
+<td class="p-4 text-primary-fixed-dim">0x4C11B</td>
+<td class="p-4">Eng. Tanaka</td>
+<td class="p-4">
+<span class="bg-surface-container-high text-on-surface border border-outline-variant px-2 py-0.5 text-[10px]">LVL_03_MAINT</span>
+</td>
+<td class="p-4 text-outline">2024.05.21 09:12:44</td>
+<td class="p-4 text-right">
+<button class="material-symbols-outlined text-outline hover:text-error" data-icon="lock_reset">lock_reset</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/10 transition-colors">
+<td class="p-4 text-primary-fixed-dim">0x12E99</td>
+<td class="p-4">Anly. Vance</td>
+<td class="p-4">
+<span class="bg-surface-container-high text-on-surface border border-outline-variant px-2 py-0.5 text-[10px]">LVL_02_READ</span>
+</td>
+<td class="p-4 text-outline">2024.05.20 23:59:59</td>
+<td class="p-4 text-right">
+<button class="material-symbols-outlined text-outline hover:text-error" data-icon="lock_reset">lock_reset</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Visual Signal Asset -->
+<section class="md:col-span-12">
+<div class="h-48 border border-outline-variant relative overflow-hidden">
+<img class="w-full h-full object-cover grayscale contrast-125 opacity-50" data-alt="A high-altitude orbital view of Earth's atmosphere showing the curvature of the planet with a thin blue line of atmosphere against the deep black void of space. The image has a technical HUD overlay with faint green grid lines, data readouts in a monospace font, and target acquisition crosshairs. The lighting is cold and precise, capturing the authoritative and mission-critical aesthetic of a ground station command center." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8WgfyEWEO9dFJFcep3HwiuuPDpESicErIWA4XFko8ah8txa7VX2tvB1FA4vNMp9WREapKgrfue9Ayh8oFSABs-7MWMh9mAEM400HBLZBJ-iT9vR3gAJBU3GNKvmvFHzmROPbxL90tPU4KwTH63ElutJmcqKwFPrz3kWCXvFqDbNWCdEvZX8wr6DR-GJQja4kSguO6rb8O4aym3vunRiea766IvzqI-q3QQAYXZ5ZXOkhtCUzF3f_r1gAu9Z3kSnMAorfEfiqtpBYZ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary-fixed-dim pulse-dot laser-glow"></div>
+<span class="font-label-caps text-label-caps text-primary-fixed-dim">LIVE_ORBITAL_FEED // SAT-ID: ALPHA_6</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe px-4 bg-surface dark:bg-surface border-t border-outline-variant z-50">
+<div class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed">
+<span class="material-symbols-outlined" data-icon="wifi_tethering">wifi_tethering</span>
+<span class="font-label-caps text-label-caps mt-1">SIGNAL</span>
+</div>
+<div class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+<span class="font-label-caps text-label-caps mt-1">FILTER</span>
+</div>
+<div class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed">
+<span class="material-symbols-outlined" data-icon="explore_neighbor">AirplaneInFlight</span>
+<span class="font-label-caps text-label-caps mt-1">STEER</span>
+</div>
+<!-- LOGS is active in an Admin Panel context -->
+<div class="flex flex-col items-center justify-center text-primary-fixed-dim bg-surface-container-highest rounded-none border-t-2 border-primary-fixed-dim p-2 active-glow">
+<span class="material-symbols-outlined" data-icon="database" style="font-variation-settings: 'FILL' 1;">database</span>
+<span class="font-label-caps text-label-caps mt-1">LOGS</span>
+</div>
+</nav>
+<!-- Decorative HUD corners -->
+<div class="fixed top-0 left-0 w-8 h-8 border-t border-l border-primary-fixed-dim/30 pointer-events-none z-50"></div>
+<div class="fixed top-0 right-0 w-8 h-8 border-t border-r border-primary-fixed-dim/30 pointer-events-none z-50"></div>
+<div class="fixed bottom-0 left-0 w-8 h-8 border-b border-l border-primary-fixed-dim/30 pointer-events-none z-50"></div>
+<div class="fixed bottom-0 right-0 w-8 h-8 border-b border-r border-primary-fixed-dim/30 pointer-events-none z-50"></div>
+</body></html>

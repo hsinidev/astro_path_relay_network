@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ASTRO-PATH // GS-01 ACCESS PORTAL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "background": "#131313",
+                        "surface-variant": "#353535",
+                        "primary-fixed": "#72ff70",
+                        "on-tertiary": "#313030",
+                        "surface-container-high": "#2a2a2a",
+                        "tertiary-container": "#dfdcdb",
+                        "secondary-fixed": "#e3e2e2",
+                        "on-tertiary-container": "#626060",
+                        "on-primary": "#003907",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "on-surface-variant": "#b9ccb2",
+                        "tertiary-fixed-dim": "#c9c6c5",
+                        "primary-fixed-dim": "#00e639",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "surface-bright": "#393939",
+                        "secondary-container": "#484949",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#353535",
+                        "surface-container": "#20201f",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-primary-fixed-variant": "#00530e",
+                        "surface-dim": "#131313",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "primary-container": "#00ff41",
+                        "on-primary-container": "#007117",
+                        "outline": "#84967e",
+                        "on-secondary-container": "#b8b8b8",
+                        "on-background": "#e5e2e1",
+                        "surface-tint": "#00e639",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-primary": "#006e16",
+                        "primary": "#ebffe2",
+                        "secondary": "#c6c6c6",
+                        "tertiary": "#fcf8f8",
+                        "outline-variant": "#3b4b37",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed-variant": "#464747",
+                        "error-container": "#93000a",
+                        "on-surface": "#e5e2e1",
+                        "surface": "#131313",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "on-secondary": "#2f3131",
+                        "on-primary-fixed": "#002203"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "stack-md": "24px",
+                        "stack-sm": "8px",
+                        "grid-overlay-size": "32px",
+                        "base-unit": "4px",
+                        "margin-mobile": "12px"
+                    },
+                    "fontFamily": {
+                        "data-mono": ["JetBrains Mono"],
+                        "headline-md": ["JetBrains Mono"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-base": ["JetBrains Mono"],
+                        "display-lg": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "data-mono": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-md": ["20px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "label-caps": ["10px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "700"}],
+                        "body-base": ["14px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "display-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.05em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #050505;
+            background-image: 
+                linear-gradient(rgba(114, 255, 112, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(114, 255, 112, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .laser-glow {
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+        }
+        .input-blink::after {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 14px;
+            background-color: #00e639;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        .glass-scrim {
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background fixed top-0 w-full z-50 border-b border-outline-variant flex justify-between items-center px-margin-mobile h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="hub">hub</span>
+<h1 class="font-display-lg text-headline-md text-primary-fixed-dim tracking-tighter">ASTRO-PATH // GS-01</h1>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-8">
+<span class="font-data-mono text-data-mono uppercase tracking-widest text-primary-fixed-dim cursor-pointer transition-colors duration-150 ease-in-out hover:text-primary-fixed">ACCESS_PORTAL</span>
+<span class="font-data-mono text-data-mono uppercase tracking-widest text-outline cursor-pointer transition-colors duration-150 ease-in-out hover:text-primary-fixed">NETWORK_MAP</span>
+<span class="font-data-mono text-data-mono uppercase tracking-widest text-outline cursor-pointer transition-colors duration-150 ease-in-out hover:text-primary-fixed">UP_LINK</span>
+</div>
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="sensors_off">sensors_off</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center pt-16 px-gutter md:px-24">
+<div class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-0 border border-outline-variant bg-surface-container-lowest overflow-hidden">
+<!-- Left Side: Technical Graphic -->
+<div class="relative hidden md:flex flex-col border-r border-outline-variant bg-surface-dim overflow-hidden">
+<!-- Mathematical Overlays -->
+<div class="absolute top-4 left-4 w-8 h-8 border-t border-l border-primary-fixed-dim opacity-50"></div>
+<div class="absolute top-4 right-4 w-8 h-8 border-t border-r border-outline opacity-30"></div>
+<div class="absolute bottom-4 left-4 w-8 h-8 border-b border-l border-outline opacity-30"></div>
+<div class="absolute bottom-4 right-4 w-8 h-8 border-b border-r border-primary-fixed-dim opacity-50"></div>
+<div class="flex-grow flex flex-col justify-center items-center p-12 relative">
+<!-- Status Pulse -->
+<div class="absolute top-12 left-12 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary-fixed-dim laser-glow animate-pulse"></div>
+<span class="font-data-mono text-data-mono text-primary-fixed-dim">ORBITAL_SYNC: ACTIVE</span>
+</div>
+<img alt="Orbital Mechanics Visualization" class="w-full aspect-square object-cover grayscale opacity-40 mix-blend-screen" data-alt="A sophisticated technical schematic of orbital mechanics overlaid on a deep space photography of Earth's horizon. The visual style is high-contrast black and white with neon green vector lines, crosshairs, and telemetry data labels. The lighting is harsh and cinematic, simulating a high-tech ground station monitor in a dark environment. The mood is mission-critical and cold." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOzQmRe2Jl7XuGFg9OT4q8ASvqnnpdhLizfL1wdE_p1sI3MYdc7w5BpIffKoL5uuYR4LoBoSY1s9RWUx-F3-HSXMbfEvX8byd10y8yh165bzChc3YYBOnHp7f1w31AsFDpVxhwIeR9wNFDFayGiRi76Kx_-Lq8elmqT3Id7xJfJl96_IIAjHelw6308yj-yBRb35s096jF3y_lSa6A6ipAQyM0TFbo6LCpKZXLr6mGHJH6iYvNtotQoZ1p-PkK4CCabPuzQ245ZB8w"/>
+<div class="mt-8 space-y-2 w-full">
+<div class="flex justify-between items-end border-b border-outline-variant pb-1">
+<span class="font-label-caps text-label-caps text-outline">VECTOR_X</span>
+<span class="font-data-mono text-data-mono text-primary-fixed-dim">0.00429-A</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant pb-1">
+<span class="font-label-caps text-label-caps text-outline">VECTOR_Y</span>
+<span class="font-data-mono text-data-mono text-primary-fixed-dim">1.99302-B</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant pb-1">
+<span class="font-label-caps text-label-caps text-outline">SIGNAL_LOAD</span>
+<span class="font-data-mono text-data-mono text-primary-fixed-dim">88.4%</span>
+</div>
+</div>
+</div>
+<!-- Footer Telemetry -->
+<div class="bg-surface-container-low p-4 border-t border-outline-variant flex justify-between">
+<div class="flex gap-4">
+<div class="px-2 py-1 bg-surface-container-highest border-l-2 border-primary-fixed-dim">
+<span class="font-label-caps text-label-caps text-primary-fixed-dim">SECURE_NODE</span>
+</div>
+<div class="px-2 py-1 bg-surface-container-highest border-l-2 border-outline">
+<span class="font-label-caps text-label-caps text-outline">ENCR: AES-256</span>
+</div>
+</div>
+<span class="font-data-mono text-data-mono text-outline self-center">GS_01_SYS_READY</span>
+</div>
+</div>
+<!-- Right Side: Access Form -->
+<div class="flex flex-col p-8 md:p-16 justify-center bg-surface-container-low">
+<div class="mb-12">
+<h2 class="font-display-lg text-display-lg text-primary-fixed-dim mb-2 uppercase tracking-tighter">SECURE_ACCESS</h2>
+<p class="font-body-base text-body-base text-outline max-w-md">Enter operational credentials to establish a high-altitude data link with the GS-01 constellation.</p>
+</div>
+<form class="space-y-10 w-full max-w-md">
+<div class="space-y-6">
+<div class="relative">
+<label class="font-label-caps text-label-caps text-primary-fixed-dim block mb-2">OPERATOR_ID</label>
+<input class="w-full bg-transparent border-t-0 border-x-0 border-b border-outline focus:border-primary-fixed-dim focus:ring-0 text-on-background font-data-mono text-data-mono py-2 px-0 placeholder:text-surface-variant transition-colors duration-300" placeholder="OP_XXXX_XXXX" type="text"/>
+</div>
+<div class="relative">
+<label class="font-label-caps text-label-caps text-primary-fixed-dim block mb-2">CLEARANCE_LEVEL</label>
+<select class="w-full bg-transparent border-t-0 border-x-0 border-b border-outline focus:border-primary-fixed-dim focus:ring-0 text-on-background font-data-mono text-data-mono py-2 px-0 transition-colors duration-300 appearance-none">
+<option class="bg-background">LEVEL_01_RECON</option>
+<option class="bg-background">LEVEL_02_ORBITAL</option>
+<option class="bg-background">LEVEL_03_COMMAND</option>
+<option class="bg-background">LEVEL_04_ROOT</option>
+</select>
+<span class="material-symbols-outlined absolute right-0 bottom-2 text-outline pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+<div class="relative">
+<label class="font-label-caps text-label-caps text-primary-fixed-dim block mb-2">ACCESS_KEY</label>
+<input class="w-full bg-transparent border-t-0 border-x-0 border-b border-outline focus:border-primary-fixed-dim focus:ring-0 text-on-background font-data-mono text-data-mono py-2 px-0 placeholder:text-surface-variant transition-colors duration-300" placeholder="••••••••••••" type="password"/>
+</div>
+</div>
+<div class="flex flex-col gap-4 pt-4">
+<button class="group relative w-full py-4 border border-primary-fixed-dim bg-transparent hover:bg-primary-fixed-dim transition-all duration-200 ease-in-out active:scale-[0.98]">
+<span class="relative z-10 font-label-caps text-label-caps text-primary-fixed-dim group-hover:text-background tracking-[0.2em]">INITIALIZE_UPLINK</span>
+</button>
+<div class="flex justify-between items-center">
+<button class="font-data-mono text-data-mono text-outline hover:text-primary-fixed-dim transition-colors" type="button">FORGOT_CREDENTIALS?</button>
+<button class="font-data-mono text-data-mono text-outline hover:text-primary-fixed-dim transition-colors flex items-center gap-2" type="button">
+                                REQUEST_ID <span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</form>
+<!-- Alert Banner -->
+<div class="mt-16 bg-primary-fixed-dim p-4 flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-background font-bold uppercase">SYSTEM_NOTICE: EXTERNAL_NETWORKS_CONNECTED</span>
+<span class="material-symbols-outlined text-background" data-icon="info">info</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface dark:bg-surface fixed bottom-0 w-full z-50 border-t border-outline-variant fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe px-4">
+<div class="flex flex-col items-center justify-center text-primary-fixed-dim bg-surface-container-highest rounded-none border-t-2 border-primary-fixed-dim p-2">
+<span class="material-symbols-outlined" data-icon="wifi_tethering">wifi_tethering</span>
+<span class="font-label-caps text-label-caps">SIGNAL</span>
+</div>
+<div class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+<span class="font-label-caps text-label-caps">FILTER</span>
+</div>
+<div class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed">
+<span class="material-symbols-outlined" data-icon="explore_neighbor">AirplaneInFlight</span>
+<span class="font-label-caps text-label-caps">STEER</span>
+</div>
+<div class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary-fixed">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-label-caps text-label-caps">LOGS</span>
+</div>
+</nav>
+<!-- Decorative Corner Crosshair -->
+<div class="fixed top-20 left-4 pointer-events-none opacity-20 hidden lg:block">
+<span class="font-data-mono text-[10px] text-primary-fixed-dim block">LAT: 34.0522° N</span>
+<span class="font-data-mono text-[10px] text-primary-fixed-dim block">LNG: 118.2437° W</span>
+</div>
+</body></html>
